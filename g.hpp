@@ -1,3 +1,6 @@
+// code by userElaina
+// pop version that you can start quickly
+
 #include "graphics.hpp"
 
 Image*default_image;

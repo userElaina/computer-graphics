@@ -1,3 +1,4 @@
+// copy from course ppt
 
 inline int SetPixel(int x,int y,int color);
 inline int SetPixel(int x,int y);
