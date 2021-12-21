@@ -5,6 +5,8 @@
 
 BMP24bits*nft;
 int ox,oy;
+int col=0x000000;
+double xa=1,xb=0,ya=1,yb=0;
 
 inline int NewImage(int x,int y){
     ox=((x>>2)+1)<<2;
@@ -22,12 +24,30 @@ inline int LoadImage(std::string pth){
     return 0;
 }
 
-inline int SetPixel(int x,int y,const int rgb=0x000000){
+inline int SetColor(int color=0x000000){
+    col=color;
+    return 0;
+}
+
+inline int SetPixel(int x,int y,int rgb=(-1)){
+    if(rgb==(-1))rgb=col;
     return nft->setpixel(nft->getp(x+ox,y+oy),rgb);
 }
 
-inline int SetPixel4(int x,int y,const int rgb=0x000000){
-    return nft->setpixel(nft->getp(x+ox,y+oy),rgb)+nft->setpixel(nft->getp(ox-x,y+oy),rgb)+nft->setpixel(nft->getp(x+ox,oy-y),rgb)+nft->setpixel(nft->getp(ox-x,oy-y),rgb);
+inline int SetPixel2(int x,int y,int rgb=(-1)){
+    return SetPixel(x,y,rgb)+SetPixel(-x,-y,rgb);
+}
+
+inline int SetPixel4(int x,int y,int rgb=(-1)){
+    return SetPixel2(x,y,rgb)+SetPixel2(-x,y,rgb);
+}
+
+inline int SetPixel8(int x,int y,int rgb=(-1)){
+    return SetPixel4(x,y,rgb)+SetPixel4(y,x,rgb);
+}
+
+inline int SetPixel_map(double x,double y,int rgb=(-1)){
+    return SetPixel(x*xa+xb,y*ya+yb,rgb);
 }
 
 inline int GetPixel(int x,int y){
@@ -43,13 +63,6 @@ inline int Save(std::string pth){
 }
 
 inline int Clear(){
-    delete nft;
-}
-
-inline int Reboot(std::string pth){
-    Save(pth);
-    Clear();
-    nft=new BMP24bits(ox<<1,oy<<1);
-    printf("RenewImage: O(%d,%d)\n",ox,oy);
+    nft->white();
     return 0;
 }
