@@ -1,2 +1,2 @@
-# jlu-computer-graphics
-吉林大学计算机图形学相关代码
+### Computer Graphics
+计算机图形学相关算法的实现.
