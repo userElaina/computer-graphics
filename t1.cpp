@@ -3,6 +3,7 @@
 int main(){
     int x=64,y=32;
     NewImage(x,y);
+    SetAxis();
 
     SetPixel(x,y,RGB(0x7f,0x00,0xf0));
     printf("%x",GetPixel(x,y));

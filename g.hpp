@@ -1,6 +1,6 @@
 // code by userElaina
 // pop version that you can start quickly
-
+#pragma once
 #include "bmp24bits.hpp"
 
 BMP24bits*nft;
@@ -24,14 +24,35 @@ inline int LoadImage(std::string pth){
     return 0;
 }
 
+inline int SetAxis(){
+    for(int i=0;i<nft->width;i++)
+        nft->setpixel(nft->getp(i,oy));
+    for(int i=0;i<nft->height;i++)
+        nft->setpixel(nft->getp(ox,i));
+    return 0;
+}
+
 inline int SetColor(int color=0x000000){
     col=color;
     return 0;
 }
 
+
 inline int SetPixel(int x,int y,int rgb=(-1)){
     if(rgb==(-1))rgb=col;
     return nft->setpixel(nft->getp(x+ox,y+oy),rgb);
+}
+
+inline int SetPixel(double x,double y,int rgb=(-1)){
+    return SetPixel((int)(x>0?x+0.5:x-0.5),(int)(y>0?y+0.5:y-0.5),rgb);
+}
+
+inline int SetPixel(std::pair<int,int>p,int rgb=(-1)){
+    return SetPixel(p.first,p.second,rgb);
+}
+
+inline int SetPixel(std::pair<double,double>p,int rgb=(-1)){
+    return SetPixel(p.first,p.second,rgb);
 }
 
 inline int SetPixel2(int x,int y,int rgb=(-1)){

@@ -1,4 +1,5 @@
-// copy from course ppt
+// code by userElaina
+#pragma once
 #include "g.hpp"
 
 inline void DDALine(int x1,int y1,int x2,int y2){

@@ -1,4 +1,5 @@
 // code by userElaina
+#pragma once
 #include<bits/stdc++.h>
 
 #define LL long long
